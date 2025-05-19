@@ -1,0 +1,19 @@
+# Exemplo de terraform.tfvars - RENOMEIE PARA terraform.tfvars E PREENCHA SEUS VALORES
+
+# tenancy_ocid     = "ocid1.tenancy.oc1..xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+# user_ocid        = "ocid1.user.oc1..xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+# fingerprint      = "xx:xx:xx:xx:xx:xx:xx:xx:xx:xx:xx:xx:xx:xx:xx:xx"
+# private_key_path = "/caminho/para/sua/chave_oci_api.pem"
+# region           = "sua-regiao-home" # ex: "us-ashburn-1" ou "sa-saopaulo-1"
+# compartment_ocid = "ocid1.compartment.oc1..xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+
+# ssh_public_key   = "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQ વિદ્યಾರ್ಥಿ... seu_usuario@sua_maquina"
+# ou leia de um arquivo:
+# ssh_public_key   = file("~/.ssh/id_rsa.pub")
+
+# Opcional: Se você quiser usar uma imagem específica
+# instance_image_ocid = "ocid1.image.oc1..xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+
+# Ajuste os recursos da instância Flex conforme a disponibilidade da sua Camada Gratuita:
+# instance_ocpus = 1
+# instance_memory_in_gbs = 6
