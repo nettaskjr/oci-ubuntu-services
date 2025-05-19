@@ -1,8 +1,5 @@
----
-
 ## Arquivo `.gitignore`
 
-```gitignore
 # Arquivos de estado local do Terraform
 *.tfstate
 *.tfstate.*
