@@ -22,9 +22,9 @@ data "oci_identity_availability_domain" "ad" {
 
 # Obtém a imagem mais recente do Ubuntu para a forma da instância
 data "oci_core_images" "ubuntu_image" {
-  compartment_id          = var.compartment_ocid # Ou o OCID do compartimento onde as imagens oficiais estão (geralmente o OCID da tenancy ou um específico para imagens)
-  operating_system        = "ubuntu"             # Pode ser necessário ajustar para "Canonical ubuntu" ou similar
-  operating_system_version = "12"                # Ou a versão mais recente disponível, ex: "11", "Generic"
+  compartment_id          = var.compartment_ocid # Pode ser necessário ajustar para o OCID do compartimento de imagens da Oracle, se diferente.
+  operating_system        = "Ubuntu"             # Alterado para Ubuntu
+  operating_system_version = "22.04"            # Especificando Ubuntu 22.04 LTS. Verifique as versões disponíveis no console OCI.
   sort_by                 = "TIMECREATED"
   sort_order              = "DESC"
   shape                   = var.instance_shape # Filtra imagens compatíveis com a forma
