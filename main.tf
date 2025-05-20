@@ -63,14 +63,14 @@ resource "oci_core_default_route_table" "vcn_default_route_table" {
 }
 
 resource "oci_core_subnet" "vdi_subnet" {
-  compartment_id      = var.compartment_ocid
-  vcn_id              = oci_core_vcn.vdi_vcn.id
-  cidr_block          = "10.0.1.0/24"
-  display_name        = "VdiSubnet"
-  dns_label           = "vdisubnet"
+  compartment_id             = var.compartment_ocid
+  vcn_id                     = oci_core_vcn.vdi_vcn.id
+  cidr_block                 = "10.0.1.0/24"
+  display_name               = "VdiSubnet"
+  dns_label                  = "vdisubnet"
   prohibit_public_ip_on_vnic = false # Permite IP público para acesso
-  route_table_id      = oci_core_vcn.vdi_vcn.default_route_table_id
-  security_list_ids   = [oci_core_vcn.vdi_vcn.default_security_list_id] # Usaremos um NSG dedicado
+  route_table_id             = oci_core_vcn.vdi_vcn.default_route_table_id
+  security_list_ids          = [oci_core_vcn.vdi_vcn.default_security_list_id] # Usaremos um NSG dedicado
 }
 
 resource "oci_core_network_security_group" "vdi_nsg" {
@@ -153,7 +153,7 @@ resource "oci_core_instance" "vdi_instance" {
   source_details {
     source_type = "image"
     # source_id   = data.oci_core_images.ubuntu_image.images[0].id # Alterado para usar a imagem Ubuntu (não funcionou)
-    source_id = var.ubuntu_image_ocid # Use esta linha se você especificou um OCID de imagem manualmente
+    source_id               = var.ubuntu_image_ocid # Use esta linha se você especificou um OCID de imagem manualmente
     boot_volume_size_in_gbs = var.boot_volume_size_in_gbs
   }
 
@@ -166,10 +166,11 @@ resource "oci_core_instance" "vdi_instance" {
   metadata = {
     ssh_authorized_keys = var.ssh_public_key
     # user_data           = base64encode(file("${path.module}/cloud_init.yaml")) # LINHA ANTIGA
-    user_data           = base64encode(templatefile("${path.module}/cloud_init.yaml", { # LINHA NOVA
+    user_data = base64encode(templatefile("${path.module}/cloud_init.yaml", { # LINHA NOVA
       vdi_user     = var.vdi_user
       vnc_password = var.vnc_password
     }))
+  }
 
   preserve_boot_volume = false # Defina como true se quiser manter o volume de inicialização após a exclusão da instância
 
