@@ -25,7 +25,7 @@ variable "private_key_path" {
 variable "region" {
   description = "Região da OCI onde os recursos serão criados. Ex: us-ashburn-1"
   type        = string
-  default     = "us-ashburn-1"
+  default     = "sa-saopaulo-1" # Região padrão, altere conforme necessário.
 }
 
 variable "compartment_ocid" {
@@ -83,4 +83,9 @@ variable "vdi_user" {
   description = "Nome do usuário para a sessão VDI."
   type        = string
   default     = "vduser"
+}
+
+variable "ubuntu_image_ocid" {
+  description = "OCID específico da imagem Ubuntu com GUI ou base para GUI."
+  default     = "ocid1.image.oc1.sa-saopaulo-1.aaaaaaaak3oxvmwi6r4oq2ptirg7eczdodqtfqdaqxfiablx3v6iqnduzuoa" # EXEMPLO
 }

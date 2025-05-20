@@ -20,15 +20,15 @@ data "oci_identity_availability_domain" "ad" {
   ad_number      = 1                # Escolha o AD número 1, 2 ou 3.
 }
 
-# Obtém a imagem mais recente do Ubuntu LTS para a forma da instância
-data "oci_core_images" "ubuntu_image" {
-  compartment_id          = var.tenancy_ocid #= var.compartment_ocid # Pode ser necessário ajustar para o OCID do compartimento de imagens da Oracle, se diferente.
-  operating_system        = "Ubuntu"             # Alterado para Ubuntu
-  operating_system_version = "22.04"            # Especificando Ubuntu 22.04 LTS. Verifique as versões disponíveis no console OCI.
-  sort_by                 = "TIMECREATED"
-  sort_order              = "DESC"
-  shape                   = var.instance_shape # Filtra imagens compatíveis com a forma
-}
+# Obtém a imagem mais recente do Ubuntu LTS para a forma da instância (Não funcionou, testar novamente)
+# data "oci_core_images" "ubuntu_image" {
+#   compartment_id          = var.tenancy_ocid #= var.compartment_ocid # Pode ser necessário ajustar para o OCID do compartimento de imagens da Oracle, se diferente.
+#   operating_system        = "Ubuntu"             # Alterado para Ubuntu
+#   operating_system_version = "22.04"            # Especificando Ubuntu 22.04 LTS. Verifique as versões disponíveis no console OCI.
+#   sort_by                 = "TIMECREATED"
+#   sort_order              = "DESC"
+#   shape                   = var.instance_shape # Filtra imagens compatíveis com a forma
+# }
 
 # Se a busca acima não funcionar bem ou para ser mais específico,
 # você pode precisar encontrar o OCID da imagem manualmente no Console da OCI
@@ -152,8 +152,8 @@ resource "oci_core_instance" "vdi_instance" {
 
   source_details {
     source_type = "image"
-    source_id   = data.oci_core_images.ubuntu_image.images[0].id # Alterado para usar a imagem Ubuntu
-    # source_id = var.ubuntu_image_ocid # Use esta linha se você especificou um OCID de imagem manualmente
+    # source_id   = data.oci_core_images.ubuntu_image.images[0].id # Alterado para usar a imagem Ubuntu (não funcionou)
+    source_id = var.ubuntu_image_ocid # Use esta linha se você especificou um OCID de imagem manualmente
     boot_volume_size_in_gbs = var.boot_volume_size_in_gbs
   }
 
