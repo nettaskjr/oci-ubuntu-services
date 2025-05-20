@@ -20,10 +20,10 @@ data "oci_identity_availability_domain" "ad" {
   ad_number      = 1                # Escolha o AD número 1, 2 ou 3.
 }
 
-# Obtém a imagem mais recente do Debian para a forma da instância
-data "oci_core_images" "debian_image" {
+# Obtém a imagem mais recente do Ubuntu para a forma da instância
+data "oci_core_images" "ubuntu_image" {
   compartment_id          = var.compartment_ocid # Ou o OCID do compartimento onde as imagens oficiais estão (geralmente o OCID da tenancy ou um específico para imagens)
-  operating_system        = "Debian"             # Pode ser necessário ajustar para "Canonical Debian" ou similar
+  operating_system        = "ubuntu"             # Pode ser necessário ajustar para "Canonical ubuntu" ou similar
   operating_system_version = "12"                # Ou a versão mais recente disponível, ex: "11", "Generic"
   sort_by                 = "TIMECREATED"
   sort_order              = "DESC"
@@ -34,8 +34,8 @@ data "oci_core_images" "debian_image" {
 # você pode precisar encontrar o OCID da imagem manualmente no Console da OCI
 # e atribuí-lo diretamente ou através de uma variável.
 # Exemplo de OCID de imagem (substitua por um OCID válido para sua região e forma):
-# variable "debian_image_ocid" {
-#   description = "OCID específico da imagem Debian com GUI ou base para GUI."
+# variable "ubuntu_image_ocid" {
+#   description = "OCID específico da imagem ubuntu com GUI ou base para GUI."
 #   default     = "ocid1.image.oc1.iad.xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
 # }
 
@@ -152,8 +152,8 @@ resource "oci_core_instance" "vdi_instance" {
 
   source_details {
     source_type = "image"
-    source_id   = data.oci_core_images.debian_image.images[0].id # Usa a imagem mais recente encontrada
-    # source_id = var.debian_image_ocid # Use esta linha se você especificou um OCID de imagem manualmente
+    source_id   = data.oci_core_images.ubuntu_image.images[0].id # Usa a imagem mais recente encontrada
+    # source_id = var.ubuntu_image_ocid # Use esta linha se você especificou um OCID de imagem manualmente
     boot_volume_size_in_gbs = var.boot_volume_size_in_gbs
   }
 

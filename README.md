@@ -1,6 +1,6 @@
-# Servidor VDI Debian com GNOME na Oracle Cloud Infrastructure (OCI) - Free Tier
+# Servidor VDI ubuntu com GNOME na Oracle Cloud Infrastructure (OCI) - Free Tier
 
-Este projeto Terraform provisiona uma máquina virtual (VM) na Oracle Cloud Infrastructure (OCI) configurada como um servidor de Virtual Desktop Infrastructure (VDI) utilizando Debian com a interface gráfica GNOME. O acesso ao desktop é feito via VNC.
+Este projeto Terraform provisiona uma máquina virtual (VM) na Oracle Cloud Infrastructure (OCI) configurada como um servidor de Virtual Desktop Infrastructure (VDI) utilizando ubuntu com a interface gráfica GNOME. O acesso ao desktop é feito via VNC.
 
 ## 🎯 Objetivo
 
@@ -26,8 +26,8 @@ Os recursos da Camada Gratuita da OCI estão sujeitos à disponibilidade e aos t
 
 1.  **Clone o Repositório:**
     ```bash
-    git clone git@github.com:nettaskjr/oci-vdi-debian-gnome-vnc.git
-    cd oci-vdi-debian-gnome-vnc
+    git clone git@github.com:nettaskjr/oci-vdi-ubuntu-gnome-vnc.git
+    cd oci-vdi-ubuntu-gnome-vnc
     ```
 
 2.  **Configure as Variáveis:**
@@ -76,9 +76,9 @@ Os recursos da Camada Gratuita da OCI estão sujeitos à disponibilidade e aos t
 ## 🖥️ Acessando o VDI
 
 1.  **Acesso SSH (Opcional, para gerenciamento):**
-    Você pode acessar a instância via SSH usando o usuário padrão do Debian (`debian`) e sua chave SSH:
+    Você pode acessar a instância via SSH usando o usuário padrão do ubuntu (`ubuntu`) e sua chave SSH:
     ```bash
-    ssh debian@<IP_PUBLICO_DA_INSTANCIA>
+    ssh ubuntu@<IP_PUBLICO_DA_INSTANCIA>
     ```
     O IP público é fornecido no output `vdi_instance_public_ip`.
 

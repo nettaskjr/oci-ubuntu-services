@@ -76,7 +76,7 @@ variable "vnc_password" {
 variable "instance_display_name" {
   description = "Nome de exibição para a instância VDI."
   type        = string
-  default     = "debian-gnome-vdi"
+  default     = "ubuntu-gnome-vdi"
 }
 
 variable "vdi_user" {

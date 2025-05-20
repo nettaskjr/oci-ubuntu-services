@@ -9,8 +9,8 @@ output "vdi_instance_ocid" {
 }
 
 output "ssh_command" {
-  description = "Comando para conectar via SSH à instância (substitua 'debian' pelo usuário apropriado se for diferente, e o caminho da chave se necessário)."
-  value       = "ssh debian@${oci_core_instance.vdi_instance.public_ip}"
+  description = "Comando para conectar via SSH à instância (substitua 'ubuntu' pelo usuário apropriado se for diferente, e o caminho da chave se necessário)."
+  value       = "ssh ubuntu@${oci_core_instance.vdi_instance.public_ip}"
 }
 
 output "vnc_connection_info" {
