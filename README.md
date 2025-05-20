@@ -1,4 +1,4 @@
-# Servidor VDI ubuntu com GNOME na Oracle Cloud Infrastructure (OCI) - Free Tier
+# Servidor VDI Ubuntu com GNOME na Oracle Cloud Infrastructure (OCI) - Free Tier
 
 Este projeto Terraform provisiona uma máquina virtual (VM) na Oracle Cloud Infrastructure (OCI) configurada como um servidor de Virtual Desktop Infrastructure (VDI) utilizando ubuntu com a interface gráfica GNOME. O acesso ao desktop é feito via VNC.
 

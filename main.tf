@@ -20,7 +20,7 @@ data "oci_identity_availability_domain" "ad" {
   ad_number      = 1                # Escolha o AD número 1, 2 ou 3.
 }
 
-# Obtém a imagem mais recente do Ubuntu para a forma da instância
+# Obtém a imagem mais recente do Ubuntu LTS para a forma da instância
 data "oci_core_images" "ubuntu_image" {
   compartment_id          = var.compartment_ocid # Pode ser necessário ajustar para o OCID do compartimento de imagens da Oracle, se diferente.
   operating_system        = "Ubuntu"             # Alterado para Ubuntu
@@ -35,8 +35,8 @@ data "oci_core_images" "ubuntu_image" {
 # e atribuí-lo diretamente ou através de uma variável.
 # Exemplo de OCID de imagem (substitua por um OCID válido para sua região e forma):
 # variable "ubuntu_image_ocid" {
-#   description = "OCID específico da imagem ubuntu com GUI ou base para GUI."
-#   default     = "ocid1.image.oc1.iad.xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+#   description = "OCID específico da imagem Ubuntu com GUI ou base para GUI."
+#   default     = "ocid1.image.oc1.iad.xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx" # EXEMPLO
 # }
 
 resource "oci_core_vcn" "vdi_vcn" {
@@ -152,7 +152,7 @@ resource "oci_core_instance" "vdi_instance" {
 
   source_details {
     source_type = "image"
-    source_id   = data.oci_core_images.ubuntu_image.images[0].id # Usa a imagem mais recente encontrada
+    source_id   = data.oci_core_images.ubuntu_image.images[0].id # Alterado para usar a imagem Ubuntu
     # source_id = var.ubuntu_image_ocid # Use esta linha se você especificou um OCID de imagem manualmente
     boot_volume_size_in_gbs = var.boot_volume_size_in_gbs
   }

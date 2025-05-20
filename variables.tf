@@ -1,7 +1,7 @@
 variable "tenancy_ocid" {
   description = "OCID da sua tenancy. Pode ser encontrado no console da OCI em Administração > Detalhes da Tenancy."
   type        = string
-  # sensitive   = true # Descomente se for armazenar informações sensíveis e não quiser que apareçam nos logs
+  # sensitive   = true
 }
 
 variable "user_ocid" {
@@ -25,7 +25,7 @@ variable "private_key_path" {
 variable "region" {
   description = "Região da OCI onde os recursos serão criados. Ex: us-ashburn-1"
   type        = string
-  default     = "us-ashburn-1" # Altere para sua região de preferência
+  default     = "us-ashburn-1"
 }
 
 variable "compartment_ocid" {
@@ -42,19 +42,19 @@ variable "instance_shape" {
 variable "instance_ocpus" {
   description = "Número de OCPUs para a instância (relevante para formas Flex como VM.Standard.A1.Flex)."
   type        = number
-  default     = 1 # Mantenha dentro dos limites do Free Tier (geralmente 1/8 OCPU para Ampere A1)
+  default     = 1
 }
 
 variable "instance_memory_in_gbs" {
   description = "Quantidade de memória em GBs para a instância (relevante para formas Flex)."
   type        = number
-  default     = 1 # Mantenha dentro dos limites do Free Tier (geralmente 1GB para VM.Standard.E2.1.Micro, ou até 6GB para Ampere A1 no total da conta)
+  default     = 1
 }
 
 variable "boot_volume_size_in_gbs" {
   description = "Tamanho do volume de inicialização em GBs."
   type        = number
-  default     = 50 # O Free Tier oferece até 200GB no total, mas verifique os limites por volume.
+  default     = 50
 }
 
 variable "ssh_public_key" {
@@ -76,7 +76,7 @@ variable "vnc_password" {
 variable "instance_display_name" {
   description = "Nome de exibição para a instância VDI."
   type        = string
-  default     = "ubuntu-gnome-vdi"
+  default     = "ubuntu-gnome-vdi" # Alterado para refletir Ubuntu
 }
 
 variable "vdi_user" {
