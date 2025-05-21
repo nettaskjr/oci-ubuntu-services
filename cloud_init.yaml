@@ -7,6 +7,8 @@ packages:
   - tigervnc-common
   - dbus-x11 # Necessário para o GNOME iniciar corretamente em algumas configurações VNC
   - net-tools # Para ifconfig, etc., se necessário para depuração
+  - ufw # Firewall, se necessário
+  - apt-file # Para buscar o pacote que contem determinado arquivo
 
 runcmd:
   # Cria o usuário VDI

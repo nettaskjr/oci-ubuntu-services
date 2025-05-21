@@ -87,5 +87,5 @@ variable "vdi_user" {
 
 variable "ubuntu_image_ocid" {
   description = "OCID específico da imagem Ubuntu com GUI ou base para GUI."
-  default     = "ocid1.image.oc1.sa-saopaulo-1.aaaaaaaak3oxvmwi6r4oq2ptirg7eczdodqtfqdaqxfiablx3v6iqnduzuoa" # EXEMPLO
+  default     = "ocid1.image.oc1.sa-saopaulo-1.aaaaaaaak3oxvmwi6r4oq2ptirg7eczdodqtfqdaqxfiablx3v6iqnduzuoa"
 }
