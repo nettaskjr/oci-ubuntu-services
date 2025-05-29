@@ -36,7 +36,7 @@ variable "compartment_ocid" {
 variable "instance_shape" {
   description = "Forma da instância. Para Free Tier, considere VM.Standard.E2.1.Micro ou VM.Standard.A1.Flex (com OCPUs e memória limitados)."
   type        = string
-  default     = "VM.Standard.E2.1.Micro"
+  default     = "VM.Standard.E2.1.Micro" # AMD
 }
 
 variable "instance_ocpus" {
@@ -76,16 +76,13 @@ variable "vnc_password" {
 variable "instance_display_name" {
   description = "Nome de exibição para a instância VDI."
   type        = string
-  default     = "ubuntu-gnome-vdi" # Alterado para refletir Ubuntu
 }
 
 variable "vdi_user" {
   description = "Nome do usuário para a sessão VDI."
   type        = string
-  default     = "vduser"
 }
 
 variable "ubuntu_image_ocid" {
   description = "OCID específico da imagem Ubuntu com GUI ou base para GUI."
-  default     = "ocid1.image.oc1.sa-saopaulo-1.aaaaaaaak3oxvmwi6r4oq2ptirg7eczdodqtfqdaqxfiablx3v6iqnduzuoa"
 }
