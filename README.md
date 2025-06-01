@@ -42,7 +42,7 @@ Os recursos da Camada Gratuita da OCI estão sujeitos à disponibilidade e aos t
     region            = "us-ashburn-1"           # Sua região OCI
     compartment_ocid  = "ocid1.compartment.oc1..xxxxxxxxxxx"
     ssh_public_key    = "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCl... user@host"
-    vnc_password      = "SuaSenhaVNCSecreta" # Use uma senha entre 6-8 caracteres
+    pass_instance      = "SuaSenhaVNCSecreta" # Use uma senha entre 6-8 caracteres
     # Opcional: defina outras variáveis de 'variables.tf' se quiser mudar os defaults
     # instance_shape = "VM.Standard.A1.Flex"
     # instance_ocpus = 2
@@ -85,7 +85,7 @@ Os recursos da Camada Gratuita da OCI estão sujeitos à disponibilidade e aos t
 2.  **Acesso VNC:**
     * **Cliente VNC:** Você precisará de um cliente VNC (como TigerVNC Viewer, RealVNC Viewer, TightVNC Viewer, etc.) instalado na sua máquina local.
     * **Endereço do Servidor:** Use o IP público da instância seguido da porta `5901` (que corresponde ao display `:1` configurado). Exemplo: `192.0.2.100:5901`.
-    * **Senha:** Use a senha VNC que você definiu na variável `vnc_password` no arquivo `terraform.tfvars`.
+    * **Senha:** Use a senha VNC que você definiu na variável `pass_instance` no arquivo `terraform.tfvars`.
     * **Usuário da Sessão:** O ambiente GNOME será executado sob o usuário `vduser` (ou o que você definiu em `vdi_user`).
 
     A primeira conexão pode demorar um pouco enquanto o ambiente gráfico é totalmente carregado.

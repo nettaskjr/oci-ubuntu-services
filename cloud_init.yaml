@@ -3,83 +3,25 @@ package_update: true
 package_upgrade: true
 packages:
   - gnome-core
-  - tigervnc-standalone-server
-  - tigervnc-common
-  - dbus-x11 # Necessário para o GNOME iniciar corretamente em algumas configurações VNC
-  - net-tools # Para ifconfig, etc., se necessário para depuração
-  - ufw # Firewall, se necessário
-  - apt-file # Para buscar o pacote que contem determinado arquivo
+  - jq
+  - curl
 
 runcmd:
-  # Cria o usuário VDI
-  - useradd -m -s /bin/bash ${vdi_user}
-  # Define uma senha simples para o usuário VDI (você pode querer um método mais seguro ou deixar para configuração manual)
-  # Para este exemplo, estamos pulando a configuração de senha de login do sistema para focar no VNC.
-  # O acesso primário será via SSH com chave e depois VNC.
+# insira aqui o que deve ser feito
+# Cria o usuário VDI e entra na pasta do usuário
+  - useradd -m -s /bin/bash ${user_instance} && cd "/home/${user_instance}"
+  - '[ ! -d "/home/${user_instance}/projetos" ] && mkdir "/home/${user_instance}/projetos"'
+  - cd /home/${user_instance}/projetos
 
-  # Configura o servidor VNC para o novo usuário
-  - mkdir -p /home/${vdi_user}/.vnc
-  - echo "${vnc_password}" | vncpasswd -f > /home/${vdi_user}/.vnc/passwd
-  - chmod 600 /home/${vdi_user}/.vnc/passwd
-  - chown -R ${vdi_user}:${vdi_user} /home/${vdi_user}/.vnc
+# Pegando a ultima versão do repositório services
+  - TAG_NAME=$(curl -s https://api.github.com/repos/nettaskjr/services/releases/latest | jq -r '.tag_name')
+  - ASSET_URL=$(curl -s https://api.github.com/repos/nettaskjr/services/releases/latest | jq -r ".tarball_url")
+  - curl -L -o "services-${TAG_NAME}.tar.gz" "$ASSET_URL"
+  - tar -zxvf "services-${TAG_NAME}.tar.gz"
+  - chmod +x *.sh
 
-  # Cria o arquivo xstartup para o GNOME
-  - |
-    cat << 'EOF' > /home/${vdi_user}/.vnc/xstartup
-    #!/bin/sh
-    unset SESSION_MANAGER
-    unset DBUS_SESSION_BUS_ADDRESS
-    export XDG_CURRENT_DESKTOP="GNOME-Flashback:GNOME"
-    export GNOME_SHELL_SESSION_MODE="classic"
-    [ -x /etc/vnc/xstartup ] && exec /etc/vnc/xstartup
-    [ -r $HOME/.Xresources ] && xrdb $HOME/.Xresources
-    vncconfig -iconic &
-    dbus-launch --exit-with-session gnome-session --session=gnome-classic &
-    EOF
-  - chmod +x /home/${vdi_user}/.vnc/xstartup
-  - chown ${vdi_user}:${vdi_user} /home/${vdi_user}/.vnc/xstartup
+# Instala o pacote services
+# sudo ./00-run.sh '${var.client}' '${var.host}' '${var.user-ec2}' '${var.email}' ${var.apps}
+  - sudo ./00-run.sh 'pessoal' 'localhost' '${var.user_instance}' 'pessoal@pessoal.com' ''
 
-  # Configura e inicia o serviço VNC para o usuário na display :1
-  # O systemd user service seria o ideal, mas para simplificar no cloud-init:
-  # Copia um arquivo de configuração de serviço para o systemd.
-  # Nota: systemd pode ser complicado de gerenciar diretamente via cloud-init sem reinicializações ou interações manuais.
-  # Uma abordagem mais simples para o primeiro boot é iniciar diretamente, mas um serviço é mais robusto.
-
-  # Configuração do serviço systemd para VNC (pode precisar de ajustes)
-  - |
-    cat << EOF > /etc/systemd/system/vncserver@.service
-    [Unit]
-    Description=Remote desktop service (VNC)
-    After=syslog.target network.target
-
-    [Service]
-    Type=forking
-    User=${vdi_user}
-    PAMName=login
-    PIDFile=/home/${vdi_user}/.vnc/%H:%i.pid
-    ExecStartPre=-/usr/bin/vncserver -kill :%i > /dev/null 2>&1
-    ExecStart=/usr/bin/vncserver -depth 24 -geometry 1280x800 -localhost no :%i
-    ExecStop=/usr/bin/vncserver -kill :%i
-
-    [Install]
-    WantedBy=multi-user.target
-    EOF
-
-  # Recarrega o systemd, habilita e inicia o serviço para display :1
-  - systemctl daemon-reload
-  - systemctl enable vncserver@1.service
-  - systemctl start vncserver@1.service
-
-  # Alternativamente, para uma inicialização rápida e menos robusta (sem systemd no cloud-init):
-  # - su - ${vdi_user} -c "vncserver :1 -depth 24 -geometry 1280x800 -localhost no"
-
-  # Instalar XRDP (opcional, se preferir RDP)
-  # - apt-get install -y xrdp
-  # - systemctl enable xrdp
-  # - systemctl start xrdp
-  # - adduser xrdp ssl-cert # Para permitir que o xrdp leia o certificado SSL
-  # - ufw allow 3389/tcp # Se estiver usando UFW. No nosso caso, o NSG da OCI controla.
-  # - echo "gnome-session" > /home/${vdi_user}/.xsession
-  # - chown ${vdi_user}:${vdi_user} /home/${vdi_user}/.xsession
-
-final_message: "A instância está configurada. O servidor VNC deve estar rodando para o usuário ${vdi_user} na display :1 (porta 5901)."
+final_message: "A instância está configurada. O servidor VNC deve estar rodando para o usuário ${user} na display :1 (porta 5901)."

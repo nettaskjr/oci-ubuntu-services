@@ -63,12 +63,12 @@ variable "ssh_public_key" {
   # sensitive   = true
 }
 
-variable "vnc_password" {
+variable "pass_instance" {
   description = "Senha para o acesso VNC. Deve ter entre 6 e 8 caracteres."
   type        = string
   sensitive   = true
   validation {
-    condition     = length(var.vnc_password) >= 6 && length(var.vnc_password) <= 8
+    condition     = length(var.pass_instance) >= 6 && length(var.pass_instance) <= 8
     error_message = "A senha VNC deve ter entre 6 e 8 caracteres."
   }
 }
@@ -78,7 +78,7 @@ variable "instance_display_name" {
   type        = string
 }
 
-variable "vdi_user" {
+variable "user_instance" {
   description = "Nome do usuário para a sessão VDI."
   type        = string
 }

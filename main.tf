@@ -167,8 +167,8 @@ resource "oci_core_instance" "vdi_instance" {
     ssh_authorized_keys = var.ssh_public_key
     # user_data           = base64encode(file("${path.module}/cloud_init.yaml")) # LINHA ANTIGA
     user_data = base64encode(templatefile("${path.module}/cloud_init.yaml", { # LINHA NOVA
-      vdi_user     = var.vdi_user
-      vnc_password = var.vnc_password
+      user_instance = var.user_instance
+      pass_instance = var.pass_instance
     }))
   }
 
