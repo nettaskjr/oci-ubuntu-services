@@ -2,7 +2,6 @@
 package_update: true
 package_upgrade: true
 packages:
-  - gnome-core
   - jq
   - curl
 
@@ -16,12 +15,11 @@ runcmd:
 # Pegando a ultima versão do repositório services
   - TAG_NAME=$(curl -s https://api.github.com/repos/nettaskjr/services/releases/latest | jq -r '.tag_name')
   - ASSET_URL=$(curl -s https://api.github.com/repos/nettaskjr/services/releases/latest | jq -r ".tarball_url")
-  - curl -L -o "services-${TAG_NAME}.tar.gz" "$ASSET_URL"
-  - tar -zxvf "services-${TAG_NAME}.tar.gz"
+  - curl -L -o "services-$TAG_NAME.tar.gz" "$ASSET_URL"
+  - tar -zxvf "services-$TAG_NAME.tar.gz"
   - chmod +x *.sh
 
 # Instala o pacote services
-# sudo ./00-run.sh '${var.client}' '${var.host}' '${var.user-ec2}' '${var.email}' ${var.apps}
-  - sudo ./00-run.sh 'pessoal' 'localhost' '${var.user_instance}' 'pessoal@pessoal.com' ''
+  - sudo ./00-run.sh 'pessoal' 'localhost' '${user_instance}' 'pessoal@pessoal.com' ''
 
-final_message: "A instância está configurada. O servidor VNC deve estar rodando para o usuário ${user} na display :1 (porta 5901)."
+final_message: "A instância está configurada. O servidor VNC deve estar rodando para o usuário ${user_instance} na display :1 (porta 5901)."
