@@ -10,6 +10,7 @@ runcmd:
 # Cria o usuário VDI e entra na pasta do usuário
   - useradd -m -s /bin/bash ${user_instance} && cd "/home/${user_instance}"
   - '[ ! -d "/home/${user_instance}/projetos" ] && mkdir "/home/${user_instance}/projetos"'
+  - chown -R ${user_instance}:${user_instance} "/home/${user_instance}/projetos"
   - cd /home/${user_instance}/projetos
 
 # Pegando a ultima versão do repositório services
@@ -17,9 +18,12 @@ runcmd:
   - ASSET_URL=$(curl -s https://api.github.com/repos/nettaskjr/services/releases/latest | jq -r ".tarball_url")
   - curl -L -o "services-$TAG_NAME.tar.gz" "$ASSET_URL"
   - tar -zxvf "services-$TAG_NAME.tar.gz"
+  - FOLDER=$(tar -tzf "services-$TAG_NAME.tar.gz" | grep '/$' | head -n 1)
+  - cd $FOLDER
   - chmod +x *.sh
 
 # Instala o pacote services
-  - sudo ./00-run.sh 'pessoal' 'localhost' '${user_instance}' 'pessoal@pessoal.com' ''
+# sudo ./00-run.sh my-desktop 127.0.0.1 nestor nestor.junior@gmail.com --terraform --aws-cli
+  - sudo ./00-run.sh 'oci' 'localhost' "${user_instance}" 'pessoal@pessoal.com' ''
 
 final_message: "A instância está configurada. O servidor VNC deve estar rodando para o usuário ${user_instance} na display :1 (porta 5901)."
