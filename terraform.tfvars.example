@@ -12,6 +12,7 @@ instance_shape          = "VM.Standard.A1.Flex" # Forma da instância, considere
 instance_ocpus          = 1 # OCPUs para a instância (relevante para formas Flex)
 instance_memory_in_gbs  = 1 # Memória em GBs para a instância (relevante para formas Flex)
 boot_volume_size_in_gbs = 50 # Tamanho do volume de inicialização em GBs
+e-mail                  = "xxxxxxxx@gmail.com" # E-mail do usuário para notificações
 
 # A conta Always Free da Oracle Cloud Infrastructure (OCI) oferece um conjunto de recursos que podem ser utilizados gratuitamente por tempo indeterminado. No entanto, é crucial entender que esses recursos possuem limites específicos. É importante notar também que a OCI oferece um período de *Free Trial* (Avaliação Gratuita) de 30 dias com US$300 em créditos para experimentar serviços além da camada Always Free. Após esse período, ou o consumo total dos créditos, a conta é automaticamente convertida para o modo Always Free, a menos que o usuário opte por um upgrade para uma conta paga.
 
