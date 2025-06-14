@@ -124,7 +124,7 @@ resource "oci_core_instance" "vdi_instance" {
   }
 
   source_details {
-    source_type = "image"
+    source_type             = "image"
     boot_volume_size_in_gbs = var.boot_volume_size_in_gbs
     source_id               = data.oci_core_images.ubuntu_image.images[0].id # Alterado para usar a imagem Ubuntu
   }

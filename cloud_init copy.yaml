@@ -70,7 +70,6 @@ runcmd:
   - systemctl daemon-reload
   - systemctl enable vncserver@1.service
   - systemctl start vncserver@1.service
-
   # Alternativamente, para uma inicialização rápida e menos robusta (sem systemd no cloud-init):
   # - su - ${vdi_user} -c "vncserver :1 -depth 24 -geometry 1280x800 -localhost no"
 
@@ -83,4 +82,5 @@ runcmd:
   # - echo "gnome-session" > /home/${vdi_user}/.xsession
   # - chown ${vdi_user}:${vdi_user} /home/${vdi_user}/.xsession
 
-final_message: "A instância está configurada. O servidor VNC deve estar rodando para o usuário ${vdi_user} na display :1 (porta 5901)."
+final_message: A instância está configurada. O servidor VNC deve estar rodando
+  para o usuário ${vdi_user} na display :1 (porta 5901).

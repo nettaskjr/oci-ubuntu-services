@@ -83,6 +83,7 @@ variable "user_instance" {
   type        = string
 }
 
-# variable "ubuntu_image_ocid" {
-#   description = "OCID específico da imagem Ubuntu com GUI ou base para GUI."
-# }
+variable "e-mail" {
+  description = "E-mail do usuário para notificações e acesso à instância. (Uso futuro)"
+  type        = string
+}
