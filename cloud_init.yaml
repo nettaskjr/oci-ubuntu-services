@@ -24,6 +24,6 @@ runcmd:
 
 # Instala o pacote services
 # sudo ./00-run.sh my-desktop 127.0.0.1 nestor nestor.junior@gmail.com --terraform --aws-cli
-  - sudo ./00-run.sh 'oci' "${oci_core_instance.vdi_instance.public_ip}" "${user_instance}" 'pessoal@pessoal.com' ''
+  - sudo ./00-run.sh 'oci' 'localhost' "${user_instance}" 'pessoal@pessoal.com' ''
 
 final_message: "A instância está configurada. O servidor VNC deve estar rodando para o usuário ${user_instance} na display :1 (porta 5901)."
