@@ -9,7 +9,7 @@ runcmd:
 # insira aqui o que deve ser feito
 # Cria o usuário VDI e entra na pasta do usuário
   - useradd -m -s /bin/bash ${user_instance} && cd "/home/${user_instance}"
-  - '[ ! -d "/home/${user_instance}/projetos" ] && mkdir "/home/${user_instance}/projetos"'
+  - '[ ! -d "/home/${user_inst ance}/projetos" ] && mkdir "/home/${user_instance}/projetos"'
   - chown -R ${user_instance}:${user_instance} "/home/${user_instance}/projetos"
   - cd /home/${user_instance}/projetos
 

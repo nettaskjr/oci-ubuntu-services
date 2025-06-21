@@ -81,7 +81,7 @@ variable "instance_display_name" {
 variable "user_instance" {
   description = "Nome do usuário para a sessão VDI."
   type        = string
-}
+} 
 
 variable "e-mail" {
   description = "E-mail do usuário para notificações e acesso à instância. (Uso futuro)"
